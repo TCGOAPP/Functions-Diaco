@@ -5,7 +5,9 @@ const {Times} = require('../utils/Times') ;
 const T = Times
  class Oportunity{
   constructor (){
+   
     this.db = new DBinplementation('opportunities');
+ 
     this.oportunityStatusInstance = new  OpportunitieStatus()
   }
 /**
@@ -36,9 +38,10 @@ const T = Times
  */
 async getListNotFill(){
   const list = [];
+ 
   const query = await this.db.query()
       .queryExecute();
-
+  
   query.forEach( reg => {
     const data =  reg .data()
     list.push({

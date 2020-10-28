@@ -32,7 +32,9 @@ class FirebaseFirestore{
     this.queryDb = this._db.collection(this.collection);
     return this
   }
-  
+  getQuery(){
+   return this._db.collection(this.collection);
+  }
   /**
    * Metodo para adicion de condocion de consulta
    * @param {String} key Nombre de key del dato del registro para filtrar
@@ -40,8 +42,7 @@ class FirebaseFirestore{
    * @param {String} value  valor a comarar
    */
   addCondition(key,queryParam,value){
-    const query =  this._db.collection(this.collection).where(key,queryParam,value);
-    this.queryDb.gd.filters.push(query.gd.filters[0]);
+    this.queryDb.where(key,queryParam,value);
     return this;
   }
   
@@ -80,4 +81,4 @@ class FirebaseFirestore{
   }
   
 }
-exports.FirebaseFirestore = FirebaseFirestore;
+module.exports = FirebaseFirestore;
