@@ -1,9 +1,8 @@
 'use strict'
-const {DBinplementation} = require('../lib/DBinplementation') ;
-
+const  FirebaseFirestore = require('../lib/Firestore') ;
 class limitDiferencilaDist{
   constructor(){
-    this.Db = new DBinplementation("limitDiferencilaDist");
+    this.Db = new FirebaseFirestore("limitDiferencilaDist");
   }
   async getLimit(){
     const query =await this.Db.getDocument('limite');

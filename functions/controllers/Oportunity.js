@@ -1,13 +1,12 @@
 'use strict'
-const {DBinplementation} = require('../lib/DBinplementation') ;
 const {OpportunitieStatus} = require('./OpportunitieStatus') ;
+const  FirebaseFirestore = require('../lib/Firestore') ;
 const {Times} = require('../utils/Times') ;
 const T = Times
  class Oportunity{
   constructor (){
    
-    this.db = new DBinplementation('opportunities');
- 
+    this.db = new FirebaseFirestore('opportunities');
     this.oportunityStatusInstance = new  OpportunitieStatus()
   }
 /**

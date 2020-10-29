@@ -1,5 +1,4 @@
 'use strict'
-const {DBinplementation} = require('../lib/DBinplementation') ;
 const  FirebaseFirestore = require('../lib/Firestore') ;
 
 class ClientHeadquarters{
@@ -7,7 +6,7 @@ class ClientHeadquarters{
     /**
      * @type {FirebaseFirestore}
      */
-    this.DB = new DBinplementation('ClientHeadquarters')
+    this.DB = new FirebaseFirestore('ClientHeadquarters')
     
   }
   async getAll(){

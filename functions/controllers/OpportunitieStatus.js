@@ -1,9 +1,11 @@
 'use strict'
-const {DBinplementation} = require('../lib/DBinplementation') ;
+
+const  FirebaseFirestore = require('../lib/Firestore') ;
 
 class OpportunitieStatus{
+
   constructor(){
-    this.Db = new DBinplementation("opportunityStatus")
+    this.Db = new FirebaseFirestore("opportunityStatus")
   }
 
   async getNivelTotype(type){

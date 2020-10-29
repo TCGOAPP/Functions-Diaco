@@ -1,17 +1,17 @@
 'use strict'
-const {DBinplementation} = require('../lib/DBinplementation') ;
-const  FirebaseFirestore = require('../lib/Firestore') ;
+const  Firestore = require('../lib/Firestore') ;
 
 class AllocationPoints{
   constructor(){
     /**
      * @type {FirebaseFirestore}
      */
-    this.DB = new DBinplementation('allocationPoints')
+    this.DB = new Firestore('allocationPoints')
     
   }
   async getByOportunityVNEF(oportunitycode){
-    const data = []
+    const data = [];
+
     const query = await this.DB.getQuery().
               where('oportunity.code','==',oportunitycode).where('codeType','==', 'VNEF').get()
 
