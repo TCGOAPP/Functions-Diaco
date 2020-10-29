@@ -15,7 +15,7 @@ const AuthRoute = require('./onCallFunctios/AuthRoute')
 admin.initializeApp();
 const auth = new AuthRoute()
 exports.Verify = functions.https.onRequest(Verify)
-//exports.Verify = functions.https.onCall(Verify)
+//exports.Verify = functions.https.onCall(Verify) 
 
 exports.addUser = functions.https.onCall((data,constex) => auth.createAuth({...data})); 
 exports.editPassword = functions.https.onCall((data,constex) => auth.updatePassword ({...data})); 
