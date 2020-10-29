@@ -5,14 +5,14 @@ const {Verify} = require ('./routes/verificationRoutes')
 const AuthRoute = require('./onCallFunctios/AuthRoute')
 
 
-let serviceAccount = require(
+/* let serviceAccount = require(
   "/home/nova/Documentos/diaco-function/functions/private.json");
  admin.initializeApp( {
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://tggodes.firebaseio.com/"
-} ); 
+} );  */
 
-//admin.initializeApp();
+admin.initializeApp();
 const auth = new AuthRoute()
 exports.Verify = functions.https.onRequest(Verify)
 //exports.Verify = functions.https.onCall(Verify)
