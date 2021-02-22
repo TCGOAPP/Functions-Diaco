@@ -66,3 +66,4 @@ node_modules/
 .env
 
 functions/private.json
+functions/key/key.json

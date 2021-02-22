@@ -32,52 +32,61 @@ try {
   const {value} = await limit.getLimit();
   const data = await op.getListNotFill();
   let increment = 0,oportunityCodeRegister = null,registred = false, asignationPoints = false;
-
-  do {
-    let reg = data[increment]
-    let valor = calc.getDistanceByCoords(
-      {
-        x: reg.coordinates.lat,
-        y: reg.coordinates.lng
-      },
-      {
-        x: lat,
-        y: lng
-      }
-      )
+ 
+  if(data[increment]){
+    do {
       
-      if(valor*1000 < value){
-        oportunityCodeRegister = data[increment].codigo;
-        registred = true;
-      }
-      increment++
-  } while (increment < data.length && !registred);
+      let reg = data[increment];
+      console.log(reg.codigo);
+      let valor = calc.getDistanceByCoords(
+        {
+          x: reg.coordinates.lat,
+          y: reg.coordinates.lng
+        },
+        {
+          x: lat,
+          y: lng
+        }
+        )
+        
+        if(valor*1000 < value && !registred){
+          oportunityCodeRegister = data[increment].codigo;
+          registred = true;
+        }
+        increment++
+    } while (increment < data.length );
+  }
 
   increment = 0
 
-  do {
-    let reg = Headquarters[increment]
-    let valor = calc.getDistanceByCoords(
-      {
-        x: reg.latitude,
-        y: reg.longitude
-      },
-      {
-        x: lat,
-        y: lng
-      }
-      )
-      
-      if(valor*1000 < value){
-        registred = true
-      }
-    increment++
-  } while (increment < Headquarters.length && !registred);
+  if(Headquarters[increment]){
+    do {
+      let reg = Headquarters[increment];
+      let valor = calc.getDistanceByCoords(
+        {
+          x: reg.latitude,
+          y: reg.longitude
+        },
+        {
+          x: lat,
+          y: lng
+        }
+        )
+        
+        if(valor*1000 < value){
+          registred = true
+        }
+      increment++
+    } while (increment < Headquarters.length && !registred);
+  }
+  console.log('codigo',oportunityCodeRegister);
 
   if(oportunityCodeRegister){
     const validationAlocation = await allocationIntace.getByOportunityVNEF(oportunityCodeRegister)
+    console.log(validationAlocation);
     asignationPoints = validationAlocation.length === 0 ? true : false
   }
+
   return res.status(200).json({
     data:{
       registred,

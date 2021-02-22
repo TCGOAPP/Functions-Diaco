@@ -3,14 +3,15 @@ const admin = require('firebase-admin');
 
 const {Verify} = require ('./routes/verificationRoutes')
 const AuthRoute = require('./onCallFunctios/AuthRoute')
+const  noficateUser  = require('./routes/Email');
 
-
-/* let serviceAccount = require(
-  "/home/nova/Documentos/diaco-function/functions/private.json");
- admin.initializeApp( {
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://tggodes.firebaseio.com/"
-} );  */
+// let serviceAccount = require(
+//   "/home/nova/Documentos/desarrollo_diaco/diaco-function/functions/key/key.json");
+  
+//  admin.initializeApp( {
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://skilful-sphere-214021.firebaseio.com/"
+// } ); 
 
 admin.initializeApp();
 const auth = new AuthRoute()
@@ -19,3 +20,4 @@ exports.Verify = functions.https.onRequest(Verify)
 
 exports.addUser = functions.https.onCall((data,constex) => auth.createAuth({...data})); 
 exports.editPassword = functions.https.onCall((data,constex) => auth.updatePassword ({...data})); 
+exports.noficateUser = functions.https.onCall((data,context) => noficateUser(data.idOportunitie)); 

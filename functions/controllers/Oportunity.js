@@ -3,7 +3,7 @@ const {OpportunitieStatus} = require('./OpportunitieStatus') ;
 const  FirebaseFirestore = require('../lib/Firestore') ;
 const {Times} = require('../utils/Times') ;
 const T = Times
- class Oportunity{
+class Oportunity{
   constructor (){
    
     this.db = new FirebaseFirestore('opportunities');
@@ -77,7 +77,7 @@ async getListNotFill(){
    * @param {Strimg} register id de registro
    */
   async getByRegister(register){
-    const query =await this.db.getDocument(register);
+    const query = await this.db.getDocument(register);
     const response = query.data();
     this.idRegister = register;
     for (const key in response) {

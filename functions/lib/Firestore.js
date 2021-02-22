@@ -59,6 +59,7 @@ class FirebaseFirestore{
    * @param {String} document nombre del documento
    */
   getDocument(document){
+    console.log('aqui',this.collection,document);
     return this._db.collection(this.collection).doc(document).get();
   }
 
