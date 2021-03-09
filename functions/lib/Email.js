@@ -4,9 +4,18 @@ const functions = require('firebase-functions');
 class Email{
 
   constructor(){
-    
+    if(!functions.config().emailconfig){
+      console.log('entro aqui');
+      require('dotenv').config()
+      this.email = process.env.email
+      this.pass =process.env.pass
+    }else{
+      this.email = functions.config().emailconfig.email;
+      this.pass = functions.config().emailconfig.pass;
+    }
+
     this.config = {
-      from: functions.config().emailconfig.email,
+      from: this.email ,
       to: '',
       subject: '',
       text:'',
@@ -14,20 +23,27 @@ class Email{
     }
 
     this.trasnporter = nodemailer.createTransport({
-    //   host:'tcgoapp.net',
-    //   port: 465,
-    //  secure: true,
-      
-      service: 'gmail', 
+      host:'tcgoapp.net',
+      port: 465,
+      secure: true,
+
       auth: {
-        user:functions.config().emailconfig.email, // generated ethereal user
-        pass: functions.config().emailconfig.pass // generated ethereal password
+        user: this.email,// generated ethereal user
+        pass: this.pass // generated ethereal password
       }
-      
+     
+  
     })
   }
   async sendEmail (){
-    return this.trasnporter.sendMail(this.config)
+   try {
+    console.log(`enviado a ${this.config.to}`);
+    await this.trasnporter.sendMail(this.config)
+    return Promise.resolve()
+   } catch (error) {
+     console.console.log('asdasd');
+    return Promise.reject(error)  
+   }
   }
   /**
    * @param {string} email
